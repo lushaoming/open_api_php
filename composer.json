@@ -1,0 +1,21 @@
+{
+    "name": "bryce/openapi",
+    "description": "Open API",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Bryce",
+            "email": "lushaoming6@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=7.1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "Bryce\\OpenApi\\": "src/Bryce/OpenApi"
+        }
+    }
+}

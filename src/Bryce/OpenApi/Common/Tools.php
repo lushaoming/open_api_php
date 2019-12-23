@@ -7,6 +7,8 @@
  */
 namespace Bryce\OpenApi\Common;
 
+use Bryce\OpenApi\Exception\SignatureException;
+
 class Tools
 {
 
@@ -39,14 +41,16 @@ class Tools
 
 
     /**
-     * @param array $data  Data involved in signing
-     * @param string $key  Client secret, must be kept secret
+     * @param array $data Data involved in signing
+     * @param string $key Client secret, must be kept secret
      * @return string
+     * @throws SignatureException
      * @author Bryce<lushaoming6@gmail.com>
      * @date   2019/12/12
      */
     public static function sign(array $data, string $key): string
     {
+        if (empty($key)) throw new SignatureException('Signature error, missing key', Error::_SIGNATURE_ERROR);
         if (isset($data['sign'])) unset($data['sign']);
 
         ksort($data);
@@ -85,12 +89,14 @@ class Tools
      */
     public static function checkSmsParams($params = []): bool
     {
+        if (!self::checkCommonParams($params)) return false;
         if (!isset($params['mobile'])) return false;
         return true;
     }
 
     public static function checkSmsVerifyData($params = []): bool
     {
+        if (!self::checkCommonParams($params)) return false;
         if (!isset($params['mobile']) || !isset($params['code'])) return false;
 
         return true;
@@ -104,6 +110,7 @@ class Tools
      */
     public static function checkEmailParams($params = []): bool
     {
+        if (!self::checkCommonParams($params)) return false;
         if (!isset($params['to']) || !isset($params['subject']) || !isset($params['body'])) return false;
         return true;
     }

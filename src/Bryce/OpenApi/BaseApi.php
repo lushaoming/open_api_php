@@ -11,7 +11,7 @@ use Bryce\OpenApi\Common\Tools;
 class BaseApi
 {
     protected $params = [];
-    protected $clientKey;
+    protected $clientKey = '';
 
     public function __construct()
     {
@@ -21,15 +21,22 @@ class BaseApi
         ];
     }
 
-    public function setClientId($clientId)
+    public function setClientId(string $clientId)
     {
         $this->params['client_id'] = $clientId;
     }
 
-    public function setClientKey($key)
+    public function setClientKey(string $key)
     {
         $this->clientKey = $key;
     }
+
+    public function setDebug(bool $debug)
+    {
+        $this->params['debug'] = (int)$debug;
+    }
+
+
 
 
 }

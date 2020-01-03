@@ -62,10 +62,10 @@ class Sms extends BaseApi
 
         $res = Tools::dealCurlResult($res);
 
-        if ($res->status == Error::_OK) {
+        if ($res->code == Error::_OK) {
             return true;
         } else {
-            throw new SmsException($res->msg, $res->status);
+            throw new SmsException($res->msg, $res->code);
         }
     }
 }

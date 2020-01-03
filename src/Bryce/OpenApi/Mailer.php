@@ -41,11 +41,10 @@ class Mailer extends BaseApi
 
         $res = Tools::dealCurlResult($res);
 
-        if ($res->status == Error::_OK) {
+        if ($res->code == Error::_OK) {
             return true;
         } else {
-            throw new MailException($res->msg, $res->status);
-            return false;
+            throw new MailException($res->msg, $res->code);
         }
     }
 }
